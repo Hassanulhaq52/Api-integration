@@ -23,7 +23,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<WeatherModel>(
+      body: FutureBuilder<WeatherModel?>(
         future: apiService.getWeatherData('Karachi'),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -72,6 +72,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           weatherData.wind!.speed.toString(),
                           style: Constants.weatherStyle,
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         AuthenticationButton(
                             title: 'Go to News Screen',
                             colour: Colors.green,
@@ -79,14 +82,32 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               Navigator.pushNamed(context, 'news_screen');
                             }),
                         SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         AuthenticationButton(
                             title: 'Go to Game Screen',
                             colour: Colors.green,
                             onpressed: () {
                               Navigator.pushNamed(context, 'game_screen');
-                            })
+                            }),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        AuthenticationButton(
+                            title: 'Go to City Screen',
+                            colour: Colors.green,
+                            onpressed: () {
+                              Navigator.pushNamed(context, 'city_screen');
+                            }),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        AuthenticationButton(
+                            title: 'Go to Title Screen',
+                            colour: Colors.green,
+                            onpressed: () {
+                              Navigator.pushNamed(context, 'title_screen');
+                            }),
                       ],
                     ),
                   ),

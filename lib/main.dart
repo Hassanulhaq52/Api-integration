@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/screens/city_screen.dart';
 import 'package:weather_app/screens/game_screen.dart';
 import 'package:weather_app/screens/home_screen.dart';
 import 'package:weather_app/screens/news_screen.dart';
 import 'package:weather_app/screens/signin_screen.dart';
 import 'package:weather_app/screens/signup_screen.dart';
+import 'package:weather_app/screens/title_screen.dart';
 import 'package:weather_app/screens/weather_screen.dart';
 
 Future<void> main() async {
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         'weather_screen': (context) => const WeatherScreen(),
         'news_screen': (context) => const NewsScreen(),
         'game_screen': (context) => const GameScreen(),
+        'city_screen': (context) => const CityScreen(),
+        'title_screen': (context) => const TitleScreen(),
       },
     );
   }

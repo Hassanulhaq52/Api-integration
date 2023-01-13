@@ -20,18 +20,12 @@ class _NewsScreenState extends State<NewsScreen> {
       children: [
         Image.asset(
           "assets/news_background.jpg",
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
         ),
         Scaffold(
-          body: FutureBuilder<NewsModel>(
+          body: FutureBuilder<NewsModel?>(
             future: newsApiService.getNewsData('au'),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -50,26 +44,26 @@ class _NewsScreenState extends State<NewsScreen> {
                             children: [
                               article.urlToImage != 'null'
                                   ? Container(
-                                width: double.infinity,
-                                height: 240,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          article.urlToImage ?? ''),
-                                      fit: BoxFit.fill),
-                                ),
-                              )
+                                      width: double.infinity,
+                                      height: 240,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                article.urlToImage ?? ''),
+                                            fit: BoxFit.fill),
+                                      ),
+                                    )
                                   : Container(
-                                margin: const EdgeInsets.all(10),
-                                padding: const EdgeInsets.all(20),
-                                color: Colors.red,
-                                child: const Text(
-                                  "Image not available",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                              ),
+                                      margin: const EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(20),
+                                      color: Colors.red,
+                                      child: const Text(
+                                        "Image not available",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                    ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -80,7 +74,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                     decoration: BoxDecoration(
                                         color: Colors.blue,
                                         borderRadius:
-                                        BorderRadius.circular(20)),
+                                            BorderRadius.circular(20)),
                                     child: Text(
                                       article.source!.name!,
                                       style: const TextStyle(
@@ -88,7 +82,6 @@ class _NewsScreenState extends State<NewsScreen> {
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold),
                                     ),
-
                                   ),
                                 ],
                               ),

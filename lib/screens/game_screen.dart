@@ -25,7 +25,7 @@ class _GameScreenState extends State<GameScreen> {
           fit: BoxFit.cover,
         ),
         Scaffold(
-          body: FutureBuilder<GameModel>(
+          body: FutureBuilder<GameModel?>(
             future: gameApiService.getGameData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
