@@ -77,6 +77,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             colour: Colors.green,
                             onpressed: () {
                               Navigator.pushNamed(context, 'news_screen');
+                            }),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        AuthenticationButton(
+                            title: 'Go to Game Screen',
+                            colour: Colors.green,
+                            onpressed: () {
+                              Navigator.pushNamed(context, 'game_screen');
                             })
                       ],
                     ),

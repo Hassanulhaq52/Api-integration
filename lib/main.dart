@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/screens/game_screen.dart';
 import 'package:weather_app/screens/home_screen.dart';
 import 'package:weather_app/screens/news_screen.dart';
 import 'package:weather_app/screens/signin_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         'signin_screen': (context) => const SignInScreen(),
         'weather_screen': (context) => const WeatherScreen(),
         'news_screen': (context) => const NewsScreen(),
+        'game_screen': (context) => const GameScreen(),
       },
     );
   }
