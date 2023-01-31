@@ -13,6 +13,18 @@ class Constants {
     color: Colors.white,
   );
 
+  static const TextStyle textStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle containerStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+  );
+
   static const InputDecoration signinFieldDecoration = InputDecoration(
     hintStyle: TextStyle(
       color: Colors.grey,

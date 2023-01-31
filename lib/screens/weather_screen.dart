@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/constants/constants.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/services/api_services.dart';
-import 'package:unities_helper/unities_helper.dart';
 import 'package:weather_app/widgets/authentication_button.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -13,7 +12,7 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  ApiService apiService = ApiService();
+  ApiServices apiService = ApiServices();
 
   int kelToCel(int? temperature) {
     final int tempInCent = temperature! - 273;
@@ -39,6 +38,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   fit: BoxFit.cover,
                 ),
                 Scaffold(
+                  appBar: AppBar(
+                    title: const Center(
+                      child: Text('Weather Screen'),
+                    ),
+                    backgroundColor: Colors.black,
+                  ),
                   backgroundColor: Colors.transparent,
                   body: SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -51,28 +56,28 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           weatherData.name!,
                           style: Constants.weatherStyle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Text(
                           '${kelToCel(temperature).toString()}°C',
                           style: Constants.weatherStyle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Text(
+                        const Text(
                           'Wind Speed:',
                           style: Constants.weatherStyle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           weatherData.wind!.speed.toString(),
                           style: Constants.weatherStyle,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         AuthenticationButton(
@@ -81,7 +86,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             onpressed: () {
                               Navigator.pushNamed(context, 'news_screen');
                             }),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         AuthenticationButton(
@@ -90,7 +95,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             onpressed: () {
                               Navigator.pushNamed(context, 'game_screen');
                             }),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         AuthenticationButton(
@@ -99,7 +104,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             onpressed: () {
                               Navigator.pushNamed(context, 'city_screen');
                             }),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         AuthenticationButton(

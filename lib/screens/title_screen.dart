@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/city_model.dart';
-import 'package:weather_app/models/game_model.dart';
+import 'package:weather_app/constants/constants.dart';
 import 'package:weather_app/models/title_model.dart';
 import 'package:weather_app/services/api_services.dart';
 
@@ -14,32 +11,31 @@ class TitleScreen extends StatefulWidget {
 }
 
 class _TitleScreenState extends State<TitleScreen> {
-  TitleApiService titleApiService = TitleApiService();
+  ApiServices apiServices = ApiServices();
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          "assets/news_background.jpg",
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-        ),
-        Scaffold(
-          body: FutureBuilder<TitleModel?>(
-            future: titleApiService.getTitleData(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final TitleModel titleData = snapshot.data!;
+    return Scaffold(
+      backgroundColor: Colors.grey.shade500,
+      appBar: AppBar(
+        title: const Text('Title Screen'),
+      ),
+      body: FutureBuilder<TitleModel?>(
+        future: apiServices.getTitleData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final TitleModel titleData = snapshot.data!;
 
-                log('game Data ${titleData.toJson().toString()}');
-
-                return ListView.builder(
+            return Theme(
+              data: ThemeData(
+                highlightColor: Colors.grey.shade300,
+              ),
+              child: Scrollbar(
+                thickness: 10,
+                thumbVisibility: true,
+                child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      // Articles? article = snapshot.data!.articles![index];
-                      // Links? linkData = snapshot.data!.links![index];
                       Highlighted? highlightedData =
                           snapshot.data!.awardsSummary!.highlighted;
                       HighlightedRanking? highlightedRanking =
@@ -47,121 +43,70 @@ class _TitleScreenState extends State<TitleScreen> {
 
                       return Column(
                         children: [
-                          Card(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.all(8),
-                              title: Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Text(
-                                      'Award Name: ${highlightedData!.awardName}',
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Count: ${highlightedData.count}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Event ID: ${highlightedData.eventId}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-
-                                  // Text(
-                                  //   'Is Winner: ${highlightedData.isWinner}',
-                                  //   style: const TextStyle(
-                                  //       color: Colors.black,
-                                  //       fontSize: 17,
-                                  //       fontWeight: FontWeight.bold),
-                                  // ),
-                                ],
-                              ),
-                              subtitle: Text(
-                                  'Is Winner: ${highlightedData.isWinner}'),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 1,
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Card(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.all(8),
-                              title: Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Text(
-                                      'Highlighted ranking',
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
+                            child: Card(
+                              child: ListTile(
+                                contentPadding: const EdgeInsets.all(8),
+                                title: Column(
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 10),
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Text(
+                                        'Award Name: ${highlightedData!.awardName}',
+                                        style: Constants.containerStyle,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    'ID: ${highlightedRanking!.id}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Event ID: ${highlightedData.eventId}',
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-
-                                  // Text(
-                                  //   'Is Winner: ${highlightedData.isWinner}',
-                                  //   style: const TextStyle(
-                                  //       color: Colors.black,
-                                  //       fontSize: 17,
-                                  //       fontWeight: FontWeight.bold),
-                                  // ),
-                                ],
+                                    Text(
+                                      'Title: ${titleData.title}',
+                                      style: Constants.textStyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'Count: ${highlightedData.count}',
+                                      style: Constants.textStyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'Event ID: ${highlightedData.eventId}',
+                                      style: Constants.textStyle,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'Rank: ${highlightedRanking!.rank.toString()}',
+                                      style: Constants.textStyle,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              subtitle: Text(
-                                  'Is Winner: ${highlightedData.isWinner}'),
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
                           ),
                         ],
                       );
-                    });
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-          ),
-        ),
-      ],
+                    }),
+              ),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 }
