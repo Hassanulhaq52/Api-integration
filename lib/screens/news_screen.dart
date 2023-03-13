@@ -62,12 +62,18 @@ class _NewsScreenState extends State<NewsScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  padding: const EdgeInsets.all(10),
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: 10,
+                                  ),
+                                  padding: const EdgeInsets.all(
+                                    10,
+                                  ),
                                   decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.circular(20)),
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(
+                                      20,
+                                    ),
+                                  ),
                                   child: Text(
                                     article.source!.name!,
                                     style: Constants.containerStyle,
